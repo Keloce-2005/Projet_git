@@ -26,7 +26,6 @@ Toutes les contributions doivent passer par :
 - push direct sur main
 - suppression de branches sans accord
 - commits non signés
-- modifications sans issue
 
 ## Respect
 
