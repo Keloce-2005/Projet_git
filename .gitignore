@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Node modules (au cas où)
+node_modules/
+
+# Environment files
+.env
+
+# Git hooks local (non versionnés)
+.git/hooks/
+
+# Backup files
+*.bak
