@@ -1,0 +1,50 @@
+#!/bin/sh
+# =============================================================
+#  Hook pre-commit — Linter ESLint
+#  Remplace le hook pre-commit Python (incompatible Linux/Mac)
+#
+#  Installation (à faire sur CHAQUE machine du binôme) :
+#    cp hooks/pre-commit .git/hooks/pre-commit
+#    chmod +x .git/hooks/pre-commit
+# =============================================================
+
+echo " Vérification du code (ESLint)..."
+
+# Vérifie que npx est disponible
+if ! command -v npx > /dev/null 2>&1; then
+  echo " npx introuvable. Installe Node.js : https://nodejs.org"
+  exit 1
+fi
+
+# Vérifie que node_modules existe
+if [ ! -d "node_modules" ]; then
+  echo "  node_modules absent. Lance 'npm install' d'abord."
+  exit 1
+fi
+
+# Récupère uniquement les fichiers JS stagés (ajoutés ou modifiés)
+STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E "\.jsx?$")
+
+if [ -z "$STAGED" ]; then
+  echo " Aucun fichier JS stagé — lint ignoré."
+  exit 0
+fi
+
+echo "Fichiers analysés :"
+echo "$STAGED" | sed 's/^/  - /'
+echo ""
+
+# Lance ESLint sur les fichiers stagés uniquement
+echo "$STAGED" | xargs npx eslint --max-warnings 0
+
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo " ESLint a détecté des erreurs. Commit bloqué."
+  echo "   → Correction auto : npx eslint --fix <fichier>"
+  exit 1
+fi
+
+echo " ESLint OK — commit autorisé."
+exit 0

@@ -1,0 +1,13 @@
+{
+  "name": "Projet_git",
+  "version": "1.0.0",
+  "description": "Conception collaborative d'une maison familiale",
+  "packages": {},
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
+  }
+}
