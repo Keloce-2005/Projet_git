@@ -34,6 +34,9 @@ docs/
 - electricite.md
 - plomberie.md
 - jardin.md
+- garage.md
+- meubles.md
+- chauffage.md
 
 .github/
 - ISSUE_TEMPLATE
